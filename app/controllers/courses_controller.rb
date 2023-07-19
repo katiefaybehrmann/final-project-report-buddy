@@ -7,7 +7,7 @@ class CoursesController < ApplicationController
     def show
         course = Course.find_by(id: params[:id])
         if course
-          render json: course
+          render json: course, include: ['reports', 'reports.student']
         else
           render json: { error: "course not found" }, status: :not_found
         end
