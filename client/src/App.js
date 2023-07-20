@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "./Context";
-import Login from "./Login/Login";
+import Login from "./SignInFlow/Login";
 import NavBar from "./NavBar";
 import { Route, Routes } from "react-router-dom";
 import Home from "./Home";
+import CourseList from "./CoursePages/CourseList";
 
 function App() {
   const { user, setUser } = useContext(UserContext)
@@ -30,6 +31,7 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<Home />}/>
+            <Route path="/courses" element={<CourseList />} />
           </Routes>
         </main>
       )}

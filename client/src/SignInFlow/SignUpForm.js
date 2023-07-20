@@ -7,7 +7,6 @@ import {
     Heading,
     Stack,
     Image,
-    Button
 } from '@chakra-ui/react';
 
 function SignUpForm({ loggingIn, setLoggingIn }) {
@@ -85,7 +84,7 @@ function SignUpForm({ loggingIn, setLoggingIn }) {
                         </FormField>
                         <Stack spacing={6}>
                             <FormField>
-                                <Button colorScheme="#DEB55B" type="submit">{isLoading ? "Loading..." : "Sign Up"}</Button>
+                                <StyledButton colorScheme="#DEB55B" type="submit">{isLoading ? "Loading..." : "Sign Up"}</StyledButton>
                             </FormField>
                         </Stack>
                         <FormField>
