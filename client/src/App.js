@@ -1,8 +1,9 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "./Context";
-import { Button } from "@chakra-ui/react";
 import Login from "./Login/Login";
 import NavBar from "./NavBar";
+import { Route, Routes } from "react-router-dom";
+import Home from "./Home";
 
 function App() {
   const { user, setUser } = useContext(UserContext)
@@ -17,13 +18,21 @@ function App() {
     });
   }, [loggingIn]);
 
-  if (!user) return <Login loggingIn={loggingIn} setLoggingIn={setLoggingIn} />;
-
 
   return (
     <div>
-      <p>placeholder</p>
-      <Button>Chakra Button</Button>
+      <NavBar />
+      {!user ? (
+        <main>
+          <Login loggingIn={loggingIn} setLoggingIn={setLoggingIn} />
+        </main>
+      ) : (
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />}/>
+          </Routes>
+        </main>
+      )}
     </div>
   );
 }

@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { ChakraProvider } from '@chakra-ui/react'
-//chakra base provider for just certain themes? how big is the js payload?
 import { BrowserRouter as Router } from 'react-router-dom';
 import { UserProvider } from './Context';
 
