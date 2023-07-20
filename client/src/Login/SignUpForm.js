@@ -1,12 +1,13 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "../Context";
 import { useNavigate } from "react-router-dom";
-import { Label, Button, Error, Input, FormField } from "../styling/styled-components";
+import { Label, StyledButton, Error, Input, FormField } from "../styling/styled-components";
 import {
     Flex,
     Heading,
     Stack,
     Image,
+    Button
 } from '@chakra-ui/react';
 
 function SignUpForm({ loggingIn, setLoggingIn }) {
@@ -84,7 +85,7 @@ function SignUpForm({ loggingIn, setLoggingIn }) {
                         </FormField>
                         <Stack spacing={6}>
                             <FormField>
-                                <Button type="submit">{isLoading ? "Loading..." : "Sign Up"}</Button>
+                                <Button colorScheme="#DEB55B" type="submit">{isLoading ? "Loading..." : "Sign Up"}</Button>
                             </FormField>
                         </Stack>
                         <FormField>

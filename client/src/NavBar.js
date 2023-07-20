@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { UserContext } from "./Context";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { Button } from "./styling/styled-components";
+import { StyledButton } from "./styling/styled-components";
 
 function NavBar() {
     const { user, setUser } = useContext(UserContext)
@@ -17,9 +17,9 @@ function NavBar() {
     return (
         <Wrapper>
             <p>navbar stuff</p>
-            <Button color="third" onClick={handleLogoutClick}>
+            <StyledButton color="third" onClick={handleLogoutClick}>
                 Logout
-            </Button>
+            </StyledButton>
         </Wrapper>
     )
 }

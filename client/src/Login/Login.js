@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Wrap, Divider } from "@chakra-ui/react";
 import LoginForm from "./LoginForm";
 import SignUpForm from "./SignUpForm";
-import { Button } from "../styling/styled-components";
+import { StyledButton } from "../styling/styled-components";
 
 function Login({ loggingIn, setLoggingIn }) {
     const [showLogin, setShowLogin] = useState(true);
@@ -14,9 +14,9 @@ function Login({ loggingIn, setLoggingIn }) {
                     <Divider />
                     <p>
                         Don't have an account? &nbsp;
-                        <Button color="secondary" onClick={() => setShowLogin(false)}>
+                        <StyledButton color="secondary" onClick={() => setShowLogin(false)}>
                             Sign Up
-                        </Button>
+                        </StyledButton>
                     </p>
                 </>
             ) : (
@@ -25,9 +25,9 @@ function Login({ loggingIn, setLoggingIn }) {
                     <Divider />
                     <p>
                         Already have an account? &nbsp;
-                        <Button color="secondary" onClick={() => setShowLogin(true)}>
+                        <StyledButton color="secondary" onClick={() => setShowLogin(true)}>
                             Log In
-                        </Button>
+                        </StyledButton>
                     </p>
                 </>
 

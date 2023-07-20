@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "../Context";
 import { useNavigate } from "react-router-dom";
-import { Button, Error, Input, FormField, Label } from "../styling/styled-components";
+import { StyledButton, Error, Input, FormField, Label } from "../styling/styled-components";
 import {
-    //     Button,
+    Button,
     Flex,
     //     FormControl,
     //     FormLabel,
@@ -75,9 +75,9 @@ function LoginForm({ loggingIn, setLoggingIn }) {
                         </FormField>
                         <Stack spacing={6}>
                             <FormField>
-                                <Button variant="fill" color="primary" type="submit">
+                                <StyledButton type="submit">
                                     {isLoading ? "Loading..." : "Login"}
-                                </Button>
+                                </StyledButton>
                             </FormField>
                         </Stack >
                         <FormField>

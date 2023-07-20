@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import '/Users/katiebehrmann/Development/code/phase-5/final-project-report-buddy/client/src/index.css'
+//import '.../index.css'
 
 const COLORS = {
   primary: {
@@ -17,7 +17,7 @@ const COLORS = {
   },
 };
 
-function Button({ variant = "fill", color = "primary", ...props }) {
+function StyledButton({ variant = "fill", color = "primary", ...props }) {
   let Component;
   if (variant === "fill") {
     Component = FillButton;
@@ -58,4 +58,4 @@ const OutlineButton = styled(ButtonBase)`
   }
 `;
 
-export default Button;
+export default StyledButton;
