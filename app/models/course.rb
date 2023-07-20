@@ -3,4 +3,6 @@ class Course < ApplicationRecord
     has_many :competency_categories
     has_many :reports
     has_many :students, through: :reports
+
+    validates_presence_of :name, :description
 end

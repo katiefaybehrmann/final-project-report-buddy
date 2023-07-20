@@ -17,6 +17,9 @@ function NavBar() {
     return (
         <Wrapper>
             <p>navbar stuff</p>
+            <StyledButton color="third" as={Link} to="/courses">
+                View Courses
+            </StyledButton>
             <StyledButton color="third" onClick={handleLogoutClick}>
                 Logout
             </StyledButton>

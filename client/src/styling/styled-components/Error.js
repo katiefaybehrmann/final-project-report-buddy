@@ -28,6 +28,7 @@ const Alert = styled.span`
   font-weight: bold;
   display: grid;
   place-content: center;
+  font-family: Karla Normal;
 `;
 
 const Message = styled.p`
