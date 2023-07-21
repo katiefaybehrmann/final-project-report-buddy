@@ -1,5 +1,6 @@
 import React, {useContext} from "react";
 import { UserContext } from "../Context";
+import { Link } from "react-router-dom";
 import { Card, CardHeader, Heading, CardBody, Button, CardFooter, Progress, VStack } from "@chakra-ui/react";
 
 function CourseCard({ course }) {
@@ -27,7 +28,7 @@ function CourseCard({ course }) {
             </CardBody>
             <CardFooter>
                 <VStack>
-                    <Button>View Course</Button>
+                    <Button as={Link} to={`/courses/${course.id}`}>View Course</Button>
                     <Button onClick={() => handleDeleteClick(course)}>Delete Course</Button>
                 </VStack>
             </CardFooter>

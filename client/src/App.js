@@ -5,6 +5,7 @@ import NavBar from "./NavBar";
 import { Route, Routes } from "react-router-dom";
 import Home from "./Home";
 import CourseList from "./CoursePages/CourseList";
+import CourseStudents from "./CoursePages/CourseStudents";
 
 function App() {
   const { user, setUser } = useContext(UserContext)
@@ -30,8 +31,9 @@ function App() {
       ) : (
         <main>
           <Routes>
-            <Route path="/" element={<Home />}/>
+            <Route path="/" element={<Home />} />
             <Route path="/courses" element={<CourseList />} />
+            <Route path="/courses/:course_id" element={<CourseStudents/>}/>
           </Routes>
         </main>
       )}
