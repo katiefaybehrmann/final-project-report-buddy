@@ -10,6 +10,7 @@ import CourseStudents from "./CoursePages/CourseStudents";
 function App() {
   const { user, setUser } = useContext(UserContext)
   const [loggingIn, setLoggingIn] = useState(false)
+  const [reports, setReports] = useState([])
 
   useEffect(() => {
     // auto-login
@@ -18,6 +19,12 @@ function App() {
         r.json().then((user) => setUser(user));
       }
     });
+  }, [loggingIn]);
+
+  useEffect(() => {
+    fetch("/reports")
+      .then((r) => r.json())
+      .then(setReports);
   }, [loggingIn]);
 
 
@@ -33,7 +40,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/courses" element={<CourseList />} />
-            <Route path="/courses/:course_id" element={<CourseStudents/>}/>
+            <Route path="/courses/:course_id" element={<CourseStudents reports={reports} setReports={setReports}/>}/>
           </Routes>
         </main>
       )}

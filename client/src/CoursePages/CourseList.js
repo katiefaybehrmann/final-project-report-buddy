@@ -3,8 +3,6 @@ import { SimpleGrid, Button, Stack } from "@chakra-ui/react";
 import { UserContext } from "../Context";
 import CourseCard from "./CourseCard";
 import AddCourse from "./AddCourse";
-// import { Route, Routes } from "react-router-dom";
-// import CourseStudents from "./CourseStudents";
 
 function CourseList() {
     const { user } = useContext(UserContext);
@@ -27,9 +25,6 @@ function CourseList() {
                         </Button>
                     </div>
                 )}
-                {/* <Routes>
-                    <Route path="/courses/:course_id" element={<CourseStudents/>}/>
-                </Routes> */}
         </Stack>
     )
 }

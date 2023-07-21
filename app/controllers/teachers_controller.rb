@@ -13,27 +13,8 @@ class TeachersController < ApplicationController
 
     def show
         current_teacher = Teacher.find(session[:teacher_id])
-        render json: current_teacher
+        render json: current_teacher, include: ['courses','courses.reports', 'courses.competency_categories']
     end
-
-    # def index
-    #     teachers = Teacher.all
-    #     render json: teachers
-    # end
-
-    # def show
-    #     teacher = Teacher.find_by(id: params[:id])
-    #     if teacher
-    #       render json: teacher
-    #     else
-    #       render json: { error: "Teacher not found" }, status: :not_found
-    #     end
-    # end
-
-    # def create
-    #     teacher = Teacher.create(teacher_params)
-    #     render json: teacher, status: :created
-    # end
 
     private
     def teacher_params

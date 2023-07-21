@@ -1,7 +1,7 @@
 class ReportsController < ApplicationController
     def index
         reports = Report.all
-        render json: reports
+        render json: reports, status: :created
     end
 
     def show
@@ -15,10 +15,18 @@ class ReportsController < ApplicationController
 
     def create
         report = Report.create(report_params)
-        render json: report, status: :created
+        if report.valid?
+            render json: report, status: :created
+        else
+            render_unprocessable_entity_response
+        end
     end
 
     private
+    def render_unprocessable_entity_response
+        render json: {errors: reports.errors.full_messages}, status: :unprocessable_entity
+    end
+
     def report_params
         params.permit(:title, :course_id, :student_id)
     end
