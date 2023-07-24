@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { UserContext } from "../Context";
 import { Card, CardHeader, Heading, CardBody, StackDivider, Stack, Box, Text, Button } from "@chakra-ui/react";
 import AddStudent from "./AddStudent";
@@ -21,7 +21,7 @@ function CourseStudents({reports, setReports}) {
                 <CardBody>
                     <Stack divider={<StackDivider />} spacing='4'>
                         {courseReports.map((r) => (
-                            <Box>
+                            <Box as={Link} to={`/courses/${course_id}/students/${r.id}`}>
                             <Heading size='xs' textTransform='uppercase'>
                                 {r.student.name}
                             </Heading>

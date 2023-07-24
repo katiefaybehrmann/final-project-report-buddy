@@ -6,6 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./Home";
 import CourseList from "./CoursePages/CourseList";
 import CourseStudents from "./CoursePages/CourseStudents";
+import StudentReportPage from "./CoursePages/StudentReportPage";
 
 function App() {
   const { user, setUser } = useContext(UserContext)
@@ -40,7 +41,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/courses" element={<CourseList />} />
-            <Route path="/courses/:course_id" element={<CourseStudents reports={reports} setReports={setReports}/>}/>
+            <Route path="/courses/:course_id/students" element={<CourseStudents reports={reports} setReports={setReports} />}/>
+            <Route path="/courses/:course_id/students/:id" element={<StudentReportPage reports={reports} setReports={setReports}/>}/>
           </Routes>
         </main>
       )}

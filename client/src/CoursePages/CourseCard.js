@@ -28,7 +28,7 @@ function CourseCard({ course }) {
             </CardBody>
             <CardFooter>
                 <VStack>
-                    <Button as={Link} to={`/courses/${course.id}`}>View Course</Button>
+                    <Button as={Link} to={`/courses/${course.id}/students`}>View Course</Button>
                     <Button onClick={() => handleDeleteClick(course)}>Delete Course</Button>
                 </VStack>
             </CardFooter>

@@ -4,14 +4,14 @@ class StudentsController < ApplicationController
         render json: students, status: created
     end
 
-    # def show
-    #     student = Student.find_by(id: params[:id])
-    #     if student
-    #       render json: student
-    #     else
-    #       render json: { error: "student not found" }, status: :not_found
-    #     end
-    # end
+    def show
+        student = Student.find_by(id: params[:id])
+        if student
+          render json: student
+        else
+          render json: { error: "student not found" }, status: :not_found
+        end
+    end
 
     def create
         student = Student.create(student_params)
