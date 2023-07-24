@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { UserContext } from "../Context";
 import { Card, CardHeader, Heading, CardBody, StackDivider, Stack, Box, Text, Button } from "@chakra-ui/react";
 import AddStudent from "./AddStudent";
+import AddCompCat from "./AddCompCat";
 
 function CourseStudents({reports, setReports}) {
     const { user } = useContext(UserContext);
@@ -10,6 +11,7 @@ function CourseStudents({reports, setReports}) {
     const displayedCourse = user.courses.find(c => c.id == course_id)
     const courseReports = reports.filter((r) => (r.course_id == displayedCourse.id))
     const [showAddStudentForm, setShowAddStudentForm] = useState(false)
+    const [showAddCompetencyForm, setShowAddCompetencyForm] = useState(false)
 
     return (
         <div>
@@ -43,6 +45,16 @@ function CourseStudents({reports, setReports}) {
                         </Button>
                     </div>
                 )}
+                {showAddCompetencyForm ? (
+                    <AddCompCat setShowAddCompetencyForm={setShowAddCompetencyForm} displayedCourse={displayedCourse}/>
+                ) :
+                (
+                    <div className="actions">
+                        <Button onClick={() => setShowAddCompetencyForm((showAddCompetencyForm) => !showAddCompetencyForm)}>
+                            Add Competency
+                        </Button>
+                    </div>
+                ) }
         </div>
     )
 }

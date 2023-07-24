@@ -15,7 +15,7 @@ class CompetencyCategoriesController < ApplicationController
 
     def create
         competency_category = CompetencyCategory.create(competency_category_params)
-        render json: competency_category, status: :created
+        render json: competency_category, include: ['course','course.teacher']
     end
 
     private

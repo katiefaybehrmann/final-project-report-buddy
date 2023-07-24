@@ -1,12 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Flex, Stack, Heading, Radio, RadioGroup } from "@chakra-ui/react";
 import { FormField, Input, Label, Error, StyledButton } from "../styling/styled-components";
-import { UserContext } from "../Context";
-
 
 
 function AddStudent({ setShowAddStudentForm, displayedCourse, reports, setReports }) {
-    const { user, setUser } = useContext(UserContext)
     const [name, setName] = useState("")
     const [pronouns, setPronouns] = useState("")
     const [errors, setErrors] = useState([]);
