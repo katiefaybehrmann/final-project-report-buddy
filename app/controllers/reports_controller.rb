@@ -1,4 +1,6 @@
 class ReportsController < ApplicationController
+    skip_before_action :authorized, only: [:generate_text]
+
     def index
         reports = Report.all
         render json: reports, status: :created
@@ -21,6 +23,7 @@ class ReportsController < ApplicationController
             render_unprocessable_entity_response
         end
     end
+
 
     private
     def render_unprocessable_entity_response

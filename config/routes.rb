@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   get "/me", to: "teachers#show"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
-  
+  post '/chat/generate_response', to: 'chat#generate_response'
+
   resources :competencies
   resources :competency_categories
   resources :reports

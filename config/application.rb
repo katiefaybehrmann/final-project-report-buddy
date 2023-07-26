@@ -44,5 +44,10 @@ module ReactRailsApiProjectTemplate
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+    # config/application.rb or config/environments/development.rb
+    config.before_configuration do
+      ENV['OPENAI_API_KEY'] = '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'
+    end
+
   end
 end
