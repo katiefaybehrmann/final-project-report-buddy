@@ -2,17 +2,34 @@
 require 'rest-client'
 
 class ChatGptClient < ApplicationRecord
-  BASE_URL = 'https://api.openai.com/v1/completions'.freeze
+    BASE_URL = 'https://api.openai.com/v1/chat/completions'.freeze
 
   def self.generate_response(prompt)
-    response = RestClient.post(BASE_URL, {
-      prompt: prompt,
-      model: "text-davinci-003",
-      max_tokens: 10, # You can adjust the response length as needed
-      temperature: 0.5, # Controls the randomness of the response, lower values make it more focused
-      api_key: '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'
-    })
-    
-    JSON.parse(response.body)['choices'][0]['text']
+    api_key = ENV['OPENAI_API_KEY']
+
+    headers = {
+      'Content-Type' => 'application/json',
+      'Authorization' => "Bearer #{api_key}"
+    }
+
+    data = {
+        'model' => 'gpt-3.5-turbo',
+        'messages' => [
+          { 'role' => 'system', 'content' => 'You are a helpful assistant.' },
+          { 'role' => 'user', 'content' => prompt }
+        ],
+        'max_tokens' => 100, # You can adjust the response length as needed
+        'temperature' => 0.5 # Controls the randomness of the response, lower values make it more focused
+      }
+
+    begin
+      response = RestClient.post(BASE_URL, data.to_json, headers)
+      result = JSON.parse(response.body)
+      completions = result['choices'][0]['message']
+      completions
+    rescue RestClient::ExceptionWithResponse => e
+      puts "Error: #{e.response.code} - #{e.response}"
+      nil
+    end
   end
 end

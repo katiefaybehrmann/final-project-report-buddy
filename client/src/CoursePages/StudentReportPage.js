@@ -14,18 +14,35 @@ function StudentReportPage({ reports, setReports }) {
     const [isAdding, setIsAdding] = useState(false)
     const [hasReport, setHasReport] = useState(false)
 
+    const handleGenerateReport = (e) => {
+        e.preventDefault()
+        fetch(`/chat/generate_response`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "prompt": `a nice message to the fifth grade student, ${displayedReport.student.name}`
+            })
+        })
+        .then((r) => {
+        if (r.ok) {
+            r.json()
+            .then((generated_report) => {
+                console.log(generated_report.response.content)});
+            }
+          else {
+            r.json().then((err) => console.log(err));
+          }})
+
+    }
+
 
     return (
         <div>
             <HStack>
                 <h3>{displayedReport.student.name}</h3>
-                { hasReport ? (
-                    <div>
-                        <Button>Generate Report</Button>
-                    </div>
-                ) : (
-                    <GeneratedReport/>
-                )}  
+                <Button onClick={handleGenerateReport}>Generate Report</Button>
             </HStack>
             <Card>
                 <CardBody>

@@ -3,6 +3,7 @@ import { UserContext } from "./Context";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { StyledButton } from "./styling/styled-components";
+import logo from "./styling/assets/logo.svg"
 
 function NavBar() {
     const { user, setUser } = useContext(UserContext)
@@ -16,7 +17,9 @@ function NavBar() {
     }
     return (
         <Wrapper>
-            <p>navbar stuff</p>
+            <button as={Link} to="/">
+                <img src={logo} />
+            </button>
             <StyledButton color="third" as={Link} to="/courses">
                 View Courses
             </StyledButton>
