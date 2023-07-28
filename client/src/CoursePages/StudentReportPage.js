@@ -13,9 +13,11 @@ function StudentReportPage({ reports, setReports }) {
     const displayedReport = reports.find(r => r.id == id)
     const [isAdding, setIsAdding] = useState(false)
     const [hasReport, setHasReport] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     const handleGenerateReport = (e) => {
         e.preventDefault()
+        setIsLoading(true);
         fetch(`/chat/generate_response`, {
             method: "POST",
             headers: {
@@ -25,16 +27,53 @@ function StudentReportPage({ reports, setReports }) {
                 "prompt": `a nice message to the fifth grade student, ${displayedReport.student.name}`
             })
         })
-        .then((r) => {
-        if (r.ok) {
-            r.json()
-            .then((generated_report) => {
-                console.log(generated_report.response.content)});
-            }
-          else {
-            r.json().then((err) => console.log(err));
-          }})
+            .then((r) => {
+                setIsLoading(false);
+                setHasReport(true)
+                if (r.ok) {
+                    r.json()
+                        .then((generated_report) => {
+                            generateReport(generated_report.response.content)
+                        });
+                }
+                else {
+                    r.json().then((err) => console.log(err));
+                }
+            })
 
+    }
+
+
+    const generateReport = (generatedReport) => {
+        fetch(`/reports/${displayedReport.id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "text": generatedReport
+            })
+        })
+            .then((r) => {
+                if (r.ok) {
+                    r.json()
+                        .then((report) => {
+                            console.log(report)
+                            handleUpdateGeneratedReports(report)
+                        })
+                }
+                else {
+                    r.json().then((err) => setErrors(err.errors));
+                }
+            })
+    }
+
+    const handleUpdateGeneratedReports = (genReport) => {
+        const updatedComps = displayedReport.competencies.map(comp => comp.id == updatedComp.id ? updatedComp : comp)
+        const updatedReport = { ...displayedReport, competencies: updatedComps }
+        const updatedReports = reports.map(r => r.id == updatedReport.id ? updatedReport : r)
+        setReports(updatedReports)
+        setIsEditing(false)
     }
 
 
@@ -42,7 +81,11 @@ function StudentReportPage({ reports, setReports }) {
         <div>
             <HStack>
                 <h3>{displayedReport.student.name}</h3>
-                <Button onClick={handleGenerateReport}>Generate Report</Button>
+                {hasReport ? (
+                    <GeneratedReport />
+                ) : (
+                    <Button onClick={handleGenerateReport}>{isLoading ? "Loading..." : "Generate Report"}</Button>
+                )}
             </HStack>
             <Card>
                 <CardBody>
