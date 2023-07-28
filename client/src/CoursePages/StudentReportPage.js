@@ -12,9 +12,9 @@ function StudentReportPage({ reports, setReports }) {
     const displayedCourse = user.courses.find(c => c.id == course_id)
     const displayedReport = reports.find(r => r.id == id)
     const [isAdding, setIsAdding] = useState(false)
-    const [hasReport, setHasReport] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
 
+    //makes call to Open AI
     const handleGenerateReport = (e) => {
         e.preventDefault()
         setIsLoading(true);
@@ -29,7 +29,6 @@ function StudentReportPage({ reports, setReports }) {
         })
             .then((r) => {
                 setIsLoading(false);
-                setHasReport(true)
                 if (r.ok) {
                     r.json()
                         .then((generated_report) => {
@@ -43,7 +42,7 @@ function StudentReportPage({ reports, setReports }) {
 
     }
 
-
+    //create report text
     const generateReport = (generatedReport) => {
         fetch(`/reports/${displayedReport.id}`, {
             method: "PATCH",
@@ -63,30 +62,26 @@ function StudentReportPage({ reports, setReports }) {
                         })
                 }
                 else {
-                    r.json().then((err) => setErrors(err.errors));
+                    r.json().then((err) => console.log(err));
                 }
             })
     }
 
+    //update report variable to trigger rerender
     const handleUpdateGeneratedReports = (genReport) => {
-        const updatedComps = displayedReport.competencies.map(comp => comp.id == updatedComp.id ? updatedComp : comp)
-        const updatedReport = { ...displayedReport, competencies: updatedComps }
-        const updatedReports = reports.map(r => r.id == updatedReport.id ? updatedReport : r)
+        const updatedReports = reports.map(r => r.id == genReport.id ? genReport : r)
         setReports(updatedReports)
-        setIsEditing(false)
     }
 
 
     return (
         <div>
-            <HStack>
                 <h3>{displayedReport.student.name}</h3>
-                {hasReport ? (
-                    <GeneratedReport />
+                {displayedReport.text ? (
+                    <GeneratedReport displayedReport={displayedReport} handleUpdateGeneratedReports={handleUpdateGeneratedReports}/>
                 ) : (
                     <Button onClick={handleGenerateReport}>{isLoading ? "Loading..." : "Generate Report"}</Button>
                 )}
-            </HStack>
             <Card>
                 <CardBody>
                     <Stack divider={<StackDivider />} spacing='4'>

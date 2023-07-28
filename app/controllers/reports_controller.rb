@@ -24,15 +24,19 @@ class ReportsController < ApplicationController
         end
     end
 
-
-    # # app/controllers/chat_controller.rb
-    # def generate_response
-    #     # @response = ChatGptClient.call(params[:message])
-    #   message = params[:prompt]
-    #   response = ChatGptClient.generate_response(message)
-  
-    #   render json: { response: response }
-    # end
+    def update
+        report = Report.find_by(id: params[:id])
+        if report
+            report.update(text: params[:text])
+            if report.valid?
+                render json: report, status: :created
+            else
+                render_unprocessable_entity_response
+            end
+        else
+            render json: { error: "report not found" }, status: :not_found
+        end
+    end
 
 
     private
