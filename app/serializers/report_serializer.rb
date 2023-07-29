@@ -5,6 +5,4 @@ class ReportSerializer < ActiveModel::Serializer
   has_many :competencies
   has_many :competency_categories
 
-  # def generated_report
-  # end
 end

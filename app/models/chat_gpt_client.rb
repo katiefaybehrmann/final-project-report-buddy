@@ -18,8 +18,8 @@ class ChatGptClient < ApplicationRecord
           { 'role' => 'system', 'content' => 'You are a helpful assistant.' },
           { 'role' => 'user', 'content' => prompt }
         ],
-        'max_tokens' => 100, # You can adjust the response length as needed
-        'temperature' => 0.5 # Controls the randomness of the response, lower values make it more focused
+        'max_tokens' => 250, # You can adjust the response length as needed
+        'temperature' => 0.3 # Controls the randomness of the response, lower values make it more focused
       }
 
     begin

@@ -1,7 +1,8 @@
 import React, { useContext, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { UserContext } from "../Context";
 import { Card, CardBody, Stack, StackDivider, Box, Text, Heading, Button, HStack } from "@chakra-ui/react";
+import { StyledButton } from "../styling/styled-components";
 import StudentCompetency from "./StudentCompetency";
 import AddStudentCompetency from "./AddStudentCompetency";
 import GeneratedReport from "./GeneratedReport";
@@ -13,6 +14,18 @@ function StudentReportPage({ reports, setReports }) {
     const displayedReport = reports.find(r => r.id == id)
     const [isAdding, setIsAdding] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
+    const masteryValues = displayedReport.competencies.map(c => c.mastery)
+
+    const average = (masteryValues) => {
+        let sum = 0;
+        for(let i = 0; i < masteryValues.length;i++){
+            sum += masteryValues[i];
+        }
+        return sum / masteryValues.length;
+    }
+
+    const reportNotesArray = displayedReport.competencies.map(c => `${displayedReport.student.pronouns} received a ${c.mastery} on ${(displayedCourse.competency_categories.find(cc => cc.id == c.competency_category_id)).name}. ${c.notes} `) 
+    const reportNotesStr = reportNotesArray.join('')
 
     //makes call to Open AI
     const handleGenerateReport = (e) => {
@@ -24,7 +37,7 @@ function StudentReportPage({ reports, setReports }) {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                "prompt": `a nice message to the fifth grade student, ${displayedReport.student.name}`
+                "prompt": `two to three sentences of an end-of-semester report for ${displayedReport.student.name} who is scoring ${average(masteryValues)}% in ${displayedCourse.name}`
             })
         })
             .then((r) => {
@@ -32,7 +45,7 @@ function StudentReportPage({ reports, setReports }) {
                 if (r.ok) {
                     r.json()
                         .then((generated_report) => {
-                            generateReport(generated_report.response.content)
+                            generateReport(generated_report.response.content + " " + reportNotesStr)
                         });
                 }
                 else {
@@ -76,13 +89,13 @@ function StudentReportPage({ reports, setReports }) {
 
     return (
         <div>
-                <h3>{displayedReport.student.name}</h3>
+                <h3>{displayedReport.student.name}: {average(masteryValues)}%</h3>
                 {displayedReport.text ? (
                     <GeneratedReport displayedReport={displayedReport} handleUpdateGeneratedReports={handleUpdateGeneratedReports}/>
                 ) : (
                     <Button onClick={handleGenerateReport}>{isLoading ? "Loading..." : "Generate Report"}</Button>
                 )}
-            <Card>
+            <Card margin='10px'>
                 <CardBody>
                     <Stack divider={<StackDivider />} spacing='4'>
                         {displayedCourse.competency_categories.map((cc) => (
@@ -115,6 +128,9 @@ function StudentReportPage({ reports, setReports }) {
                     </Stack>
                 </CardBody>
             </Card>
+            <StyledButton as={Link} to={`/courses/${course_id}/students`}>
+                {`< Back`}
+            </StyledButton>
         </div>
     )
 }

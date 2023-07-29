@@ -8,6 +8,7 @@ function AddStudent({ setShowAddStudentForm, displayedCourse, reports, setReport
     const [pronouns, setPronouns] = useState("")
     const [errors, setErrors] = useState([]);
 
+
     const handleSubmit = (e) => {
         e.preventDefault()
         fetch('/students', {
