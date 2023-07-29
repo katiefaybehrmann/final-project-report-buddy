@@ -31,6 +31,30 @@ function GeneratedReport({ displayedReport, handleUpdateGeneratedReports }) {
             })
     }
 
+    const handleDeleteText = (e) => {
+        e.preventDefault()
+        fetch(`/reports/${displayedReport.id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "text": null
+            })
+        })
+            .then((r) => {
+                if (r.ok) {
+                    r.json()
+                        .then((updatedReport) => {
+                            handleUpdateGeneratedReports(updatedReport)
+                        });
+                }
+                else {
+                    r.json().then((err) => console.log(err));
+                }
+            })
+    }
+
 
     return (
         <div>
@@ -60,10 +84,13 @@ function GeneratedReport({ displayedReport, handleUpdateGeneratedReports }) {
         ) : (
             <div>
                 <Text pt='2' fontSize='sm'>{displayedReport.text}</Text>
-                <Button onClick={() => setIsEditing((isEditing) => !isEditing)}>
+                <Button margin={"10px"} onClick={() => setIsEditing((isEditing) => !isEditing)}>
                     <span aria-label="edit">
                         Edit Report
                     </span>
+                </Button>
+                <Button margin={"10px"} onClick={handleDeleteText}>
+                    Delete Report
                 </Button>
             </div>
         )}
