@@ -6,7 +6,7 @@ import { StyledButton } from "./styling/styled-components";
 import logo from "./styling/assets/logo.svg"
 
 function NavBar() {
-    const { user, setUser } = useContext(UserContext)
+    const { setUser } = useContext(UserContext)
 
     function handleLogoutClick() {
         fetch("/logout", { method: "DELETE" }).then((r) => {
@@ -17,11 +17,14 @@ function NavBar() {
     }
     return (
         <Wrapper>
-            <button as={Link} to="/">
-                <img src={logo} />
-            </button>
+            <StyledButton color="third" as={Link} to="/">
+                <img src={logo} alt="Report Buddy Logo"/>
+            </StyledButton>
             <StyledButton color="third" as={Link} to="/courses">
                 View Courses
+            </StyledButton>
+            <StyledButton color="third" as={Link} to="/about">
+                About
             </StyledButton>
             <StyledButton color="third" onClick={handleLogoutClick}>
                 Logout

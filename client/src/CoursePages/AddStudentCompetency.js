@@ -4,7 +4,7 @@ import { FormField, Input } from "../styling/styled-components";
 
 function AddStudentCompetency({displayedReport, setIsAdding, reports, setReports, cc}){
     const [notes, setNotes] = useState("")
-    const [mastery, setMastery] = useState(0)
+    const [mastery, setMastery] = useState(50)
     const [errors, setErrors] = useState([])
 
     const handleSubmit = (e) => {

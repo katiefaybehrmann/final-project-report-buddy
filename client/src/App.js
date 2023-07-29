@@ -7,6 +7,7 @@ import Home from "./Home";
 import CourseList from "./CoursePages/CourseList";
 import CourseStudents from "./CoursePages/CourseStudents";
 import StudentReportPage from "./CoursePages/StudentReportPage";
+import About from "./About";
 
 function App() {
   const { user, setUser } = useContext(UserContext)
@@ -39,10 +40,11 @@ function App() {
       ) : (
         <main>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home reports={reports}/>} />
             <Route path="/courses" element={<CourseList />} />
             <Route path="/courses/:course_id/students" element={<CourseStudents reports={reports} setReports={setReports} />}/>
             <Route path="/courses/:course_id/students/:id" element={<StudentReportPage reports={reports} setReports={setReports}/>}/>
+            <Route path="/about" element={<About/>}/>
           </Routes>
         </main>
       )}

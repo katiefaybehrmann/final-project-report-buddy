@@ -42,6 +42,8 @@ function GeneratedReport({ displayedReport, handleUpdateGeneratedReports }) {
                         <FormField>
                             <textarea
                                 type="textarea"
+                                rows="5" 
+                                cols="40"
                                 id="text"
                                 autoComplete="off"
                                 value={reportText}
