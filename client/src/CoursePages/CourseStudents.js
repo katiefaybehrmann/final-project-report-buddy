@@ -4,6 +4,7 @@ import { UserContext } from "../Context";
 import { Card, CardHeader, Heading, CardBody, StackDivider, Stack, Box, Text, Button, Spacer, Flex } from "@chakra-ui/react";
 import AddStudent from "./AddStudent";
 import AddCompCat from "./AddCompCat";
+import { v4 as uuidv4} from "uuid";
 import { StyledButton } from "../styling/styled-components";
 
 function CourseStudents({ reports, setReports }) {
@@ -37,7 +38,7 @@ function CourseStudents({ reports, setReports }) {
                 <CardBody>
                     <Stack divider={<StackDivider />} spacing='4'>
                         {courseReports.map((r) => (
-                            <Flex>
+                            <Flex key={uuidv4()}>
                                 <Box as={Link} to={`/courses/${course_id}/students/${r.id}`}>
                                     <Heading size='xs' textTransform='uppercase'>
                                         {r.student.name}
