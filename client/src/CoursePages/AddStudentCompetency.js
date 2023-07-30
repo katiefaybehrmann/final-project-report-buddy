@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Slider, Box, Button, SliderTrack, SliderFilledTrack, SliderThumb, SliderMark, } from "@chakra-ui/react";
-import { FormField, Input } from "../styling/styled-components";
+import { FormField, Input, Error } from "../styling/styled-components";
 
-function AddStudentCompetency({displayedReport, setIsAdding, reports, setReports, cc}){
+function AddStudentCompetency({ displayedReport, setIsAdding, reports, setReports, cc }) {
     const [notes, setNotes] = useState("")
     const [mastery, setMastery] = useState(50)
     const [errors, setErrors] = useState([])
@@ -21,27 +21,29 @@ function AddStudentCompetency({displayedReport, setIsAdding, reports, setReports
                 "report_id": displayedReport.id
             })
         })
-        .then((r) => {
-        if (r.ok) {
-            r.json()
-            .then((newComp) => {
-                console.log(newComp)
-                handleAddStudentComp(newComp)});
-            }
-          else {
-            r.json().then((err) => setErrors(err.errors));
-          }})
+            .then((r) => {
+                if (r.ok) {
+                    r.json()
+                        .then((newComp) => {
+                            console.log(newComp)
+                            handleAddStudentComp(newComp)
+                        });
+                }
+                else {
+                    r.json().then((err) => setErrors(err.errors));
+                }
+            })
     }
 
     const handleAddStudentComp = (newComp) => {
         const updatedComps = [...displayedReport.competencies, newComp]
-        const updatedReport = {...displayedReport, competencies: updatedComps}
+        const updatedReport = { ...displayedReport, competencies: updatedComps }
         const updatedReports = reports.map(r => r.id == updatedReport.id ? updatedReport : r)
         setReports(updatedReports)
         setIsAdding(false)
     }
 
-    return(
+    return (
         <div>
             <form onSubmit={handleSubmit}>
                 <FormField>
@@ -83,7 +85,10 @@ function AddStudentCompetency({displayedReport, setIsAdding, reports, setReports
                     </Box>
                 </FormField>
                 <FormField>
-                    {errors}
+                    {errors.map((err) => (
+                        <Error key={err}>{err}</Error>
+                    ))
+                    }
                 </FormField>
                 <FormField>
                     <Button type="submit">

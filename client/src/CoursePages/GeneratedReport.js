@@ -5,6 +5,7 @@ import { FormField, Input, Label, Error, StyledButton } from "../styling/styled-
 function GeneratedReport({ displayedReport, handleUpdateGeneratedReports }) {
     const [reportText, setReportText] = useState(displayedReport.text)
     const [isEditing, setIsEditing] = useState(false)
+    const [errors, setErrors] = useState([]); 
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -26,7 +27,7 @@ function GeneratedReport({ displayedReport, handleUpdateGeneratedReports }) {
                         });
                 }
                 else {
-                    r.json().then((err) => console.log(err));
+                    r.json().then((err) => setErrors(err.errors));
                 }
             })
     }
@@ -50,7 +51,7 @@ function GeneratedReport({ displayedReport, handleUpdateGeneratedReports }) {
                         });
                 }
                 else {
-                    r.json().then((err) => console.log(err));
+                    r.json().then((err) => setErrors(err));
                 }
             })
     }
@@ -73,6 +74,12 @@ function GeneratedReport({ displayedReport, handleUpdateGeneratedReports }) {
                                 value={reportText}
                                 onChange={(e) => setReportText(e.target.value)}
                             />
+                        </FormField>
+                        <FormField>
+                            {errors.map((err) => (
+                                <Error key={err}>{err}</Error>
+                            ))
+                            }
                         </FormField>
                         <StyledButton type="submit">
                             Update Report

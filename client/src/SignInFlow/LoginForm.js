@@ -3,20 +3,16 @@ import { UserContext } from "../Context";
 import { useNavigate } from "react-router-dom";
 import { StyledButton, Error, Input, FormField, Label } from "../styling/styled-components";
 import {
-    // Button,
     Flex,
-    //     FormControl,
-    //     FormLabel,
     Heading,
-    //     Input,
     Stack,
     Image,
 } from '@chakra-ui/react';
 
 import reportBuddyLogin from '../styling/assets/reportBuddyLogin.png'
 
-function LoginForm({ loggingIn, setLoggingIn }) {
-    const { user, setUser } = useContext(UserContext);
+function LoginForm({ setLoggingIn }) {
+    const { setUser } = useContext(UserContext);
     const navigate = useNavigate();
 
     const [username, setUsername] = useState("");

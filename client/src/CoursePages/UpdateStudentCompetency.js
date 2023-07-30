@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Slider, Box, Button, SliderTrack, SliderFilledTrack, SliderThumb, SliderMark, } from "@chakra-ui/react";
-import { FormField, Input } from "../styling/styled-components";
+import { FormField, Input, Error } from "../styling/styled-components";
 
 function UpdateStudentCompetency({ comp, onUpdateComp }) {
     const [notes, setNotes] = useState(comp.notes)
@@ -75,7 +75,10 @@ function UpdateStudentCompetency({ comp, onUpdateComp }) {
                     </Box>
                 </FormField>
                 <FormField>
-                    {errors}
+                    {errors.map((err) => (
+                        <Error key={err}>{err}</Error>
+                    ))
+                    }
                 </FormField>
                 <FormField>
                     <Button type="submit">

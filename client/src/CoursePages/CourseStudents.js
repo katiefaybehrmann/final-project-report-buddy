@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { UserContext } from "../Context";
-import { Card, CardHeader, Heading, CardBody, StackDivider, Stack, Box, Text, Button } from "@chakra-ui/react";
+import { Card, CardHeader, Heading, CardBody, StackDivider, Stack, Box, Text, Button, Spacer, Flex } from "@chakra-ui/react";
 import AddStudent from "./AddStudent";
-import { StyledButton } from "../styling/styled-components";
 import AddCompCat from "./AddCompCat";
+import { StyledButton } from "../styling/styled-components";
 
 function CourseStudents({ reports, setReports }) {
     const { user } = useContext(UserContext);
@@ -13,6 +13,19 @@ function CourseStudents({ reports, setReports }) {
     const courseReports = reports.filter((r) => (r.course_id == displayedCourse.id))
     const [showAddStudentForm, setShowAddStudentForm] = useState(false)
     const [showAddCompetencyForm, setShowAddCompetencyForm] = useState(false)
+
+    const handleDeleteReport = (deletedReport) => {
+        fetch(`/reports/${deletedReport.id}`, {
+            method: "DELETE",
+        });
+        deleteReport(deletedReport)
+    }
+
+    const deleteReport = (deletedReport) => {
+        const updatedReports = reports.filter(r => r.id !== deletedReport.id)
+        setReports(updatedReports)
+    }
+
 
     return (
         <div>
@@ -24,14 +37,20 @@ function CourseStudents({ reports, setReports }) {
                 <CardBody>
                     <Stack divider={<StackDivider />} spacing='4'>
                         {courseReports.map((r) => (
-                            <Box as={Link} to={`/courses/${course_id}/students/${r.id}`}>
-                                <Heading size='xs' textTransform='uppercase'>
-                                    {r.student.name}
-                                </Heading>
-                                <Text pt='2' fontSize='sm'>
-                                    {r.title}
-                                </Text>
-                            </Box>
+                            <Flex>
+                                <Box as={Link} to={`/courses/${course_id}/students/${r.id}`}>
+                                    <Heading size='xs' textTransform='uppercase'>
+                                        {r.student.name}
+                                    </Heading>
+                                    <Text pt='2' fontSize='sm'>
+                                        {r.title}
+                                    </Text>
+                                </Box>
+                                <Spacer/>
+                                <StyledButton onClick={() => handleDeleteReport(r)}>
+                                    X
+                                </StyledButton>
+                            </Flex>
                         ))}
                     </Stack>
                 </CardBody>
@@ -56,9 +75,9 @@ function CourseStudents({ reports, setReports }) {
                         </Button>
                     </div>
                 )}
-                <Button margin='10px' as={Link} to={`/courses`}>
-                    {`< Back`}
-                </Button>
+            <Button margin='10px' as={Link} to={`/courses`}>
+                {`< Back`}
+            </Button>
 
         </div>
     )

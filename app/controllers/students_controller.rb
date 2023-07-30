@@ -18,15 +18,11 @@ class StudentsController < ApplicationController
         if student.valid?
             render json: student, status: :created
         else
-            render_unprocessable_entity_response
+            render json: {errors: student.errors.full_messages}, status: :unprocessable_entity
         end
     end
 
     private
-
-    def render_unprocessable_entity_response
-        render json: {errors: students.errors.full_messages}, status: :unprocessable_entity
-    end
 
     def student_params
         params.permit(:name, :pronouns)

@@ -3,4 +3,5 @@ class Student < ApplicationRecord
     has_many :courses, through: :reports
 
     validates :name, presence: true, uniqueness: true
+    validates :pronouns, presence: true
 end

@@ -1,5 +1,5 @@
 class ReportsController < ApplicationController
-    # skip_before_action :authorized, only: [:generate_response]
+    # skip_before_action :authorized, only: [:create]
 
     def index
         reports = Report.all
@@ -11,7 +11,7 @@ class ReportsController < ApplicationController
         if report
           render json: report
         else
-          render json: { error: "report not found" }, status: :not_found
+            render_not_found_response
         end
     end
 
@@ -20,7 +20,7 @@ class ReportsController < ApplicationController
         if report.valid?
             render json: report, status: :created
         else
-            render_unprocessable_entity_response
+            render json: {errors: report.errors.full_messages}, status: :unprocessable_entity
         end
     end
 
@@ -31,17 +31,27 @@ class ReportsController < ApplicationController
             if report.valid?
                 render json: report, status: :created
             else
-                render_unprocessable_entity_response
+                render json: {errors: report.errors.full_messages}, status: :unprocessable_entity
             end
         else
-            render json: { error: "report not found" }, status: :not_found
+            render_not_found_response
+        end
+    end
+
+    def destroy
+        report = Report.find_by(id: params[:id])
+        if report
+            report.destroy
+            head :no_content
+        else
+            render_not_found_response
         end
     end
 
 
     private
-    def render_unprocessable_entity_response
-        render json: {errors: reports.errors.full_messages}, status: :unprocessable_entity
+    def render_not_found_response
+        render json: { error: "report not found" }, status: :not_found
     end
 
     def report_params

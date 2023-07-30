@@ -18,23 +18,23 @@ class CoursesController < ApplicationController
         if course.valid?
             render json: course, status: :created
         else
-            render_unprocessable_entity_response
+            render json: {errors: course.errors.full_messages}, status: :unprocessable_entity
         end         
     end
 
-    def update
-        course = current_teacher.courses.find_by(id: params[:id])
-        if course
-            course.update(course_params)
-            if course.valid?
-                render json: course, status: :created
-            else
-                render_unprocessable_entity_response
-            end
-        else
-            render_not_found_response
-        end
-    end
+    # def update
+    #     course = current_teacher.courses.find_by(id: params[:id])
+    #     if course
+    #         course.update(course_params)
+    #         if course.valid?
+    #             render json: course, status: :created
+    #         else
+    #             render_unprocessable_entity_response
+    #         end
+    #     else
+    #         render_not_found_response
+    #     end
+    # end
 
     def destroy
         course = current_teacher.courses.find_by(id: params[:id])
@@ -47,10 +47,6 @@ class CoursesController < ApplicationController
     end
 
     private
-
-    def render_unprocessable_entity_response
-        render json: {errors: course.errors.full_messages}, status: :unprocessable_entity
-    end
 
     def render_not_found_response
         render json: { error: "Course not found" }, status: :not_found

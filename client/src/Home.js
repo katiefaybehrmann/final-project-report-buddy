@@ -3,12 +3,9 @@ import { UserContext } from "./Context";
 import {
     Box,
     Button,
-    Center,
-    HStack,
     Stack,
     chakra
 } from '@chakra-ui/react'
-import { StyledButton } from "./styling/styled-components";
 import { Link } from "react-router-dom";
 
 

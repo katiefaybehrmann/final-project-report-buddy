@@ -11,8 +11,8 @@ import {
 import reportBuddyLogin from '../styling/assets/reportBuddyLogin.png'
 
 
-function SignUpForm({ loggingIn, setLoggingIn }) {
-    const { user, setUser } = useContext(UserContext);
+function SignUpForm({ setLoggingIn }) {
+    const { setUser } = useContext(UserContext);
     const navigate = useNavigate();
 
     const [username, setUsername] = useState("");
