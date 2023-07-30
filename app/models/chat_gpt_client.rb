@@ -1,4 +1,4 @@
-# app/services/chat_gpt_client.rb
+# app/models/chat_gpt_client.rb
 require 'rest-client'
 
 class ChatGptClient < ApplicationRecord

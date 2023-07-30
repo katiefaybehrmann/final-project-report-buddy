@@ -4,7 +4,6 @@ class ChatController < ApplicationController
 
     # app/controllers/chat_controller.rb
     def generate_response
-        # @response = ChatGptClient.call(params[:message])
       message = params[:prompt]
       response = ChatGptClient.generate_response(message)
   

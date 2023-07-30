@@ -50,8 +50,9 @@ end
 
 gem "active_model_serializers", "~> 0.10.12"
 
+gem 'httparty'
 gem 'openai'
 gem "ruby-openai"
 gem 'rest-client'
-gem 'httparty'
+
 
