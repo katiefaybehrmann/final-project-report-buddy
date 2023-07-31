@@ -21,7 +21,7 @@ function App() {
         r.json().then((user) => setUser(user));
       }
     });
-  }, [loggingIn]);
+  }, [loggingIn, setUser]);
 
   useEffect(() => {
     fetch("/reports")
