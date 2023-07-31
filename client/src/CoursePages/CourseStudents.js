@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { UserContext } from "../Context";
-import { Card, CardHeader, Heading, CardBody, StackDivider, Stack, Box, Text, Button, Spacer, Flex } from "@chakra-ui/react";
+import { Card, CardHeader, Heading, CardBody, StackDivider, Stack, Box, Text, Button, Spacer, Flex, Container } from "@chakra-ui/react";
 import AddStudent from "./AddStudent";
 import AddCompCat from "./AddCompCat";
 import { v4 as uuidv4} from "uuid";
@@ -29,7 +29,7 @@ function CourseStudents({ reports, setReports }) {
 
 
     return (
-        <div>
+        <Container>
             <Card>
                 <CardHeader>
                     <Heading size='md'>{displayedCourse.name} Students</Heading>
@@ -80,7 +80,7 @@ function CourseStudents({ reports, setReports }) {
                 {`< Back`}
             </Button>
 
-        </div>
+        </Container>
     )
 }
 

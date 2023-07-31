@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { UserContext } from "../Context";
-import { Card, CardBody, Stack, StackDivider, Box, Text, Heading, Button } from "@chakra-ui/react";
+import { Card, CardBody, Stack, StackDivider, Box, Text, Heading, Button, Container, HStack } from "@chakra-ui/react";
 import { StyledButton, Error } from "../styling/styled-components";
-import {v4 as uuidv4} from 'uuid'
+import { v4 as uuidv4 } from 'uuid'
 import StudentCompetency from "./StudentCompetency";
 import AddStudentCompetency from "./AddStudentCompetency";
 import GeneratedReport from "./GeneratedReport";
@@ -20,13 +20,13 @@ function StudentReportPage({ reports, setReports }) {
 
     const average = (masteryValues) => {
         let sum = 0;
-        for(let i = 0; i < masteryValues.length;i++){
+        for (let i = 0; i < masteryValues.length; i++) {
             sum += masteryValues[i];
         }
         return sum / masteryValues.length;
     }
 
-    const reportNotesArray = displayedReport.competencies.map(c => `${displayedReport.student.pronouns} received a ${c.mastery} on ${(displayedCourse.competency_categories.find(cc => cc.id == c.competency_category_id)).name}. ${c.notes} `) 
+    const reportNotesArray = displayedReport.competencies.map(c => `${displayedReport.student.pronouns} received a ${c.mastery} on ${(displayedCourse.competency_categories.find(cc => cc.id == c.competency_category_id)).name}. ${c.notes} `)
     const reportNotesStr = reportNotesArray.join('')
 
     //makes call to Open AI
@@ -90,19 +90,21 @@ function StudentReportPage({ reports, setReports }) {
 
 
     return (
-        <div>
-                <h3>{displayedReport.student.name}</h3>
+        <Container>
+            <HStack divider={<StackDivider />}>
+                <Heading size='lg' margin="10px">{displayedReport.student.name}</Heading>
                 {displayedReport.text ? (
-                    <GeneratedReport displayedReport={displayedReport} handleUpdateGeneratedReports={handleUpdateGeneratedReports}/>
+                    <GeneratedReport displayedReport={displayedReport} handleUpdateGeneratedReports={handleUpdateGeneratedReports} />
                 ) : (
                     <div>
-                    <Button onClick={handleGenerateReport}>{isLoading ? "Loading..." : "Generate Report"}</Button>
-                    {errors.map((err) => (
-                                <Error key={err}>{err}</Error>
-                            ))
-                            }
+                        <Button onClick={handleGenerateReport}>{isLoading ? "Loading..." : "Generate Report"}</Button>
+                        {errors.map((err) => (
+                            <Error key={err}>{err}</Error>
+                        ))
+                        }
                     </div>
                 )}
+            </HStack>
             <Card margin='10px'>
                 <CardBody>
                     <Stack divider={<StackDivider />} spacing='4'>
@@ -111,9 +113,10 @@ function StudentReportPage({ reports, setReports }) {
                                 <Heading size='xs' textTransform='uppercase'>
                                     {cc.name}
                                 </Heading>
-                                <Text pt='2' fontSize='sm'>
+                                <Text pt='4' fontSize='sm'>
                                     {cc.description}
                                 </Text>
+                                <br/>
                                 {displayedReport.competencies.find(comp => comp.competency_category_id === cc.id) ? (
                                     <StudentCompetency key={uuidv4()} displayedReport={displayedReport} reports={reports} setReports={setReports} cc={cc} />
                                 ) : (
@@ -139,7 +142,7 @@ function StudentReportPage({ reports, setReports }) {
             <StyledButton as={Link} to={`/courses/${course_id}/students`}>
                 {`< Back`}
             </StyledButton>
-        </div>
+        </Container>
     )
 }
 
