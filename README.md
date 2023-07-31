@@ -32,19 +32,19 @@ ReportBuddy features five client routes using react-router-dom, including two dy
 4. Implement password protection and authentication.
 ReportBuddy uses the bcrypt gem and the has_secure_password macro to ensure safe, secure, and encrypted usage.
 
-Include full CRUD on at least 1 model, following REST conventions.
+5. Include full CRUD on at least 1 model, following REST conventions.
 Currently ReportBuddy features full CRUD on the report model, though all other models include create, read, and either delete or update functionality.
 
-Implement validations and error handling.
+6. Implement validations and error handling.
 Each model in ReportBuddy has specific validations. When errors occur, they are displayed sleekly on the front end to communicate information with the user.
 
-Implement something new not taught in the curriculum. (Check in with your instructor to ensure the scope of your idea is appropriate.)
+7. Implement something new not taught in the curriculum. (Check in with your instructor to ensure the scope of your idea is appropriate.)
 ReportBuddy is fully integrated with OpenAI's ChatGPT function to help generate reports for students. More information on my learnings can be found on my blog: https://katiebehrmann.org/codey-behrmann/2023/7/30/integrating-openai-into-a-ruby-on-railsreact-edtech-app. 
 
-Implement useContext or Redux.
+8. Implement useContext or Redux.
 useContext is employed in ReportBuddy to quickly obtain user data and ensure seamless usage.
 
-Fully deploy and host your project.
+9. Fully deploy and host your project.
 This project has been deployed successfully using Render.
 
 ### User Journey
