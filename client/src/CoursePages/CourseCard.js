@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { UserContext } from "../Context";
 import { Link } from "react-router-dom";
-import { Card, CardHeader, Heading, CardBody, Button, CardFooter, Progress, VStack, CircularProgress, CircularProgressLabel } from "@chakra-ui/react";
+import { Card, CardHeader, Heading, CardBody, Button, CardFooter, VStack, CircularProgress, CircularProgressLabel } from "@chakra-ui/react";
 
 function CourseCard({ course }) {
     const { user, setUser } = useContext(UserContext)

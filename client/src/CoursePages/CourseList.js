@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { SimpleGrid, Button, Stack, Container, Flex } from "@chakra-ui/react";
+import { SimpleGrid, Button, Container } from "@chakra-ui/react";
 import { UserContext } from "../Context";
 import CourseCard from "./CourseCard";
 import AddCourse from "./AddCourse";

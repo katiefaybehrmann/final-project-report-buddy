@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Flex, Stack, Heading, Text, Button } from "@chakra-ui/react";
-import { FormField, Input, Label, Error, StyledButton } from "../styling/styled-components";
+import { Flex, Stack, Text, Button } from "@chakra-ui/react";
+import { FormField, Error, StyledButton } from "../styling/styled-components";
 
 function GeneratedReport({ displayedReport, handleUpdateGeneratedReports }) {
     const [reportText, setReportText] = useState(displayedReport.text)
@@ -68,7 +68,7 @@ function GeneratedReport({ displayedReport, handleUpdateGeneratedReports }) {
                             <textarea
                                 type="textarea"
                                 rows="5" 
-                                cols="40"
+                                cols="60"
                                 id="text"
                                 autoComplete="off"
                                 value={reportText}

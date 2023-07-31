@@ -22,7 +22,7 @@ function Home({ reports }) {
             {reportsLeft > 0 ? (
                 <Stack spacing={"4"}>
                     <chakra.h2 textAlign={'center'} fontFamily={"Karla Normal"}>
-                        You have {reportsLeft} left!
+                        You have {reportsLeft} reports left to complete!
                     </chakra.h2>
                     <Button as={Link} to="/courses">
                         Click here to complete!
