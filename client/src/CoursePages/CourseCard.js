@@ -3,11 +3,12 @@ import { UserContext } from "../Context";
 import { Link } from "react-router-dom";
 import { Card, CardHeader, Heading, CardBody, Button, CardFooter, VStack, CircularProgress, CircularProgressLabel } from "@chakra-ui/react";
 
-function CourseCard({ course }) {
+function CourseCard({ course, reports }) {
     const { user, setUser } = useContext(UserContext)
-    const unfinishedReports = course.reports.filter(r => r.text == null).length
-    const totalReports = course.reports.length
-    const reportProgress = ((totalReports - unfinishedReports) / totalReports) * 100
+    const courseReports = reports.filter(r => r.course_id == course.id)
+    const unfinishedReports = courseReports.filter(r => r.text == null).length
+    const totalReports = courseReports.length
+    const reportProgress = Math.round(((totalReports - unfinishedReports) / totalReports) * 100)
 
     const handleDeleteCourse = (deletedCourse) => {
         const updatedCourses = user.courses.filter(c => c.id !== deletedCourse.id)

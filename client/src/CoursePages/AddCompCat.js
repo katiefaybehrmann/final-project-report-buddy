@@ -83,9 +83,7 @@ function AddCompCat({setShowAddCompetencyForm, displayedCourse}){
                             </StyledButton>
                         </FormField>
                         <FormField>
-                            {errors.map((err) => (
-                                <Error key={err}>{err}</Error>
-                            ))}
+                            {errors}
                         </FormField>
                     </form>
                 </Stack>

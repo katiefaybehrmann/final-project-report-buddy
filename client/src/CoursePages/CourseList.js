@@ -4,7 +4,7 @@ import { UserContext } from "../Context";
 import CourseCard from "./CourseCard";
 import AddCourse from "./AddCourse";
 
-function CourseList() {
+function CourseList({reports}) {
     const { user } = useContext(UserContext);
     const [showAddCourseForm, setShowAddCourseForm] = useState(false)
 
@@ -24,7 +24,7 @@ function CourseList() {
             <Container>
                 <SimpleGrid minChildWidth='120px' spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
                     {user.courses.map((course) => (
-                        <CourseCard key={course.id} course={course} />
+                        <CourseCard key={course.id} course={course} reports={reports}/>
                     ))}
                 </SimpleGrid>
 
