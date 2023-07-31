@@ -99,6 +99,7 @@ function SignUpForm({ setLoggingIn }) {
             </Flex>
             <Flex flex={1}>
                 <Image
+                margin={"10px"}
                     alt={'Login Image'}
                     objectFit={'cover'}
                     src={

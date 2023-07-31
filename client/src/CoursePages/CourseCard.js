@@ -27,8 +27,8 @@ function CourseCard({ course }) {
                 <Heading size='md'>{course.name}</Heading>
             </CardHeader>
             <CardBody>
-                <CircularProgress size='75px' value={reportProgress} color='#3F5B6C'>
-                    <CircularProgressLabel>{reportProgress}%</CircularProgressLabel>
+                <CircularProgress size='75px' value={reportProgress ? (reportProgress) : (0)} color='#3F5B6C'>
+                    <CircularProgressLabel>{reportProgress ? (reportProgress) : (0)}%</CircularProgressLabel>
                 </CircularProgress>
             </CardBody>
             <CardFooter>

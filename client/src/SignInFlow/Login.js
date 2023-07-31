@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Wrap, Divider } from "@chakra-ui/react";
+import { Divider, Container } from "@chakra-ui/react";
 import LoginForm from "./LoginForm";
 import SignUpForm from "./SignUpForm";
 import { StyledButton } from "../styling/styled-components";
@@ -7,7 +7,7 @@ import { StyledButton } from "../styling/styled-components";
 function Login({ loggingIn, setLoggingIn }) {
     const [showLogin, setShowLogin] = useState(true);
     return (
-        <Wrap padding="16px">
+        <Container>
             {showLogin ? (
                 <>
                     <LoginForm loggingIn={loggingIn} setLoggingIn={setLoggingIn} />
@@ -32,7 +32,7 @@ function Login({ loggingIn, setLoggingIn }) {
                 </>
 
             )}
-        </Wrap>
+        </Container>
     )
 }
 
