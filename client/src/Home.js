@@ -4,14 +4,24 @@ import {
     Box,
     Button,
     Stack,
-    chakra
+    chakra,
+    filter
 } from '@chakra-ui/react'
 import { Link } from "react-router-dom";
 
 
 function Home({ reports }) {
     const { user } = useContext(UserContext);
-    const reportsLeft = reports.filter(r => r.text == null).length
+    const courseIDs = user.courses.map(c => c.id)
+    const filterReports = (courseIDs, reports) => {
+        return reports.filter(r => courseIDs.includes(r.course_id));
+    }
+    const totalReports = (filterReports(courseIDs, reports))
+    const reportsLeft = totalReports.filter(r => r.text == null).length
+
+    console.log(reportsLeft)
+
+
 
     return (
         <Box maxW="7xl" mx={'auto'} pt={5} px={{ base: 2, sm: 12, md: 17 }}>

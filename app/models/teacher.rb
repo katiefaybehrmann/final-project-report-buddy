@@ -6,4 +6,5 @@ class Teacher < ApplicationRecord
     has_many :reports, through: :courses
     
     validates :username, presence: true, uniqueness: true
+
 end

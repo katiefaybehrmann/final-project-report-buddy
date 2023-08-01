@@ -3,4 +3,5 @@ class TeacherSerializer < ActiveModel::Serializer
   has_many :courses
   has_many :competency_categories
   has_many :reports
+
 end

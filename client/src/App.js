@@ -27,7 +27,7 @@ function App() {
     fetch("/reports")
       .then((r) => r.json())
       .then(setReports);
-  }, [loggingIn]);
+  }, []);
 
 
   return (
