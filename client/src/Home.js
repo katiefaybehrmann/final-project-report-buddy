@@ -19,7 +19,6 @@ function Home({ reports }) {
     const totalReports = (filterReports(courseIDs, reports))
     const reportsLeft = totalReports.filter(r => r.text == null).length
 
-    console.log(reportsLeft)
 
 
 
