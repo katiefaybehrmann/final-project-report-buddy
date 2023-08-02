@@ -26,8 +26,8 @@ function App() {
   useEffect(() => {
     fetch("/reports")
       .then((r) => r.json())
-      .then(setReports);
-  }, []);
+      .then((r) => setReports(r));
+  }, [setReports, loggingIn]);
 
 
   return (

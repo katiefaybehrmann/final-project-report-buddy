@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { UserContext } from "../Context";
-import { Card, CardBody, Stack, StackDivider, Box, Text, Heading, Button, Container, HStack } from "@chakra-ui/react";
+import { Card, CardBody, Stack, StackDivider, Box, Text, Heading, Button, Container, HStack, propNames } from "@chakra-ui/react";
 import { StyledButton, Error } from "../styling/styled-components";
 import { v4 as uuidv4 } from 'uuid'
 import StudentCompetency from "./StudentCompetency";
@@ -9,10 +9,14 @@ import AddStudentCompetency from "./AddStudentCompetency";
 import GeneratedReport from "./GeneratedReport";
 
 function StudentReportPage({ reports, setReports }) {
+    setReports(reports)
+
     let { course_id, id } = useParams();
     const { user } = useContext(UserContext)
     const displayedCourse = user.courses.find(c => c.id == course_id)
     const displayedReport = reports.find(r => r.id == id)
+    console.log(reports)
+    console.log(displayedReport)
     const [isAdding, setIsAdding] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [errors, setErrors] = useState([])
@@ -56,7 +60,7 @@ function StudentReportPage({ reports, setReports }) {
                 else {
                     r.json().then((err) => console.log(err.errors));
                 }
-            }).catch((err) => console.log(err))
+            }).catch((err) => alert(err))
 
     }
 

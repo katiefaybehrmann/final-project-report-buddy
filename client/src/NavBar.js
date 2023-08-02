@@ -12,8 +12,10 @@ function NavBar() {
         fetch("/logout", { method: "DELETE" }).then((r) => {
             if (r.ok) {
                 setUser(null);
+            }else {
+                r.json().then((err) => console.log(err.errors));
             }
-        });
+        }).catch((err) => alert(err))
     }
     return (
         <Wrapper>
