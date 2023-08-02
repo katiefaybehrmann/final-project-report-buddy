@@ -47,13 +47,16 @@ function StudentReportPage({ reports, setReports }) {
                 if (r.ok) {
                     r.json()
                         .then((generated_report) => {
-                            generateReport(generated_report.response.content + " " + reportNotesStr)
+                            generated_report.response ? (
+                            generateReport(generated_report.response.content + " " + reportNotesStr)) :(
+                                console.log("rate limit exceeded")
+                            )
                         });
                 }
                 else {
                     r.json().then((err) => console.log(err.errors));
                 }
-            })
+            }).catch((err) => console.log(err))
 
     }
 
